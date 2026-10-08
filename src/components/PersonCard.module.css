@@ -1,0 +1,68 @@
+/* 등록 인물 카드 */
+.personCard {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 7px;
+
+    background: #07110e;
+    border: 2px solid #204638;
+    color: #eafff5;
+    cursor: pointer;
+
+    text-align: left;
+    font-family: "Space Mono", monospace;
+    transition: border-color 0.2s;
+}
+
+.personCard:hover {
+    border-color: #54fca5;
+}
+
+/* 대표사진 영역 */
+.photoArea {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    background: #10231b;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* 실제 대표사진 */
+.photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 사진이 없을 때 */
+
+.noPhoto {
+    font-size: 10px;
+    color: #658a77;
+    text-align: center;
+    white-space: nowrap;
+}
+
+
+/* 인물 이름 */
+.name {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 700;
+    color: #eafff5;
+}
+
+/* 오른쪽 화살표 */
+.arrow {
+    padding-right: 10px;
+    font-size: 26px;
+    font-weight: 700;
+    color: #54fca5;
+}

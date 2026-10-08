@@ -1,0 +1,144 @@
+
+/* Viewer 전체 화면 */
+.container {
+  width: 100%;
+  height: 100vh;
+  min-width: 1200px;
+  background: #050909;
+  color: #eafff5;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 상단 헤더 */
+.header {
+  height: 70px;
+  min-height: 70px;
+  padding: 0 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #204638;
+  background: #050909;
+}
+
+.logo {
+  font-family: "Press Start 2P", monospace;
+  font-size: 20px;
+  color: #eafff5;
+}
+
+.serverStatus {
+  border: 1px solid #204638;
+  padding: 10px 12px;
+  color: #54fca5;
+  font-size: 11px;
+}
+
+/* 메인 3분할 */
+.main {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  flex: 1;
+  min-height: 0;
+}
+
+.originalSection,
+.processedSection,
+.personSection {
+  min-width: 0;
+  padding: 30px 24px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.originalSection,
+.processedSection {
+  border-right: 2px solid #204638;
+}
+
+.processedSection {
+  background: #07100d;
+}
+
+/* 영역 제목 */
+.sectionTitle {
+  font-family: "Space Mono", monospace;
+  font-size: 17px;
+  font-weight: 700;
+  color: #eafff5;
+}
+
+/* 영상 영역 */
+.videoArea {
+  width: 100%;
+  height: 400px;
+  background: #000;
+  border: 2px solid #276b53;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  position: relative;
+}
+
+.videoText {
+  font-family: "Space Mono", monospace;
+  font-size: 15px;
+  color: #b6fbd8;
+  text-align: center;
+}
+
+/* 영상 버튼 */
+.videoButton {
+  width: 100%;
+  height: 50px;
+  flex-shrink: 0;
+  background: #54fca5;
+  border: 3px solid #54fca5;
+  color: #050909;
+  font-family: "Space Mono", monospace;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 5px 5px 0 #176c49;
+}
+
+/* 등록 인물 목록 */
+.personList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.personCard {
+  min-height: 78px;
+  border: 2px solid #204638;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.arrow {
+  color: #54fca5;
+  font-size: 24px;
+}
+
+/* 인물 추가 버튼 */
+.addButton {
+  width: 100%;
+  height: 50px;
+  margin-top: 16px;
+  background: transparent;
+  border: 2px solid #54fca5;
+  color: #54fca5;
+  font-family: "Space Mono", monospace;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 5px 5px 0 #176c49;
+}
