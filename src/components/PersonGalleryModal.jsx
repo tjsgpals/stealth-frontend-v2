@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import styles from "./PersonGalleryModal.module.css";
 
@@ -14,12 +13,12 @@ function PersonGalleryModal({
 
   // 현재 대표사진 찾기
   const representativePhoto = photos.find(
-    (photo) => photo.is_representative === true
+    (photo) => photo.is_representative === true,
   );
 
   // 사용자가 선택한 사진
   const selectedPhoto = photos.find(
-    (photo) => photo.photo_id === selectedPhotoId
+    (photo) => photo.photo_id === selectedPhotoId,
   );
 
   return (
@@ -57,32 +56,24 @@ function PersonGalleryModal({
                 className={styles.representativeImage}
               />
             ) : (
-              <span className={styles.emptyPhoto}>
-                대표사진 없음
-              </span>
+              <span className={styles.emptyPhoto}>대표사진 없음</span>
             )}
 
             {representativePhoto && (
-              <span className={styles.representativeLabel}>
-                ★ 대표사진
-              </span>
+              <span className={styles.representativeLabel}>★ 대표사진</span>
             )}
           </div>
 
           <div className={styles.profileInfo}>
             <span className={styles.infoLabel}>이름</span>
-            <strong className={styles.personName}>
-              {person.name}
-            </strong>
+            <strong className={styles.personName}>{person.name}</strong>
           </div>
         </section>
 
         {/* 사진 갤러리 */}
         <section className={styles.gallerySection}>
           {photos.length === 0 ? (
-            <div className={styles.emptyGallery}>
-              등록된 사진이 없습니다.
-            </div>
+            <div className={styles.emptyGallery}>등록된 사진이 없습니다.</div>
           ) : (
             <div className={styles.photoGrid}>
               {photos.map((photo) => (
@@ -90,13 +81,9 @@ function PersonGalleryModal({
                   key={photo.photo_id}
                   type="button"
                   className={`${styles.photoItem} ${
-                    selectedPhotoId === photo.photo_id
-                      ? styles.selected
-                      : ""
+                    selectedPhotoId === photo.photo_id ? styles.selected : ""
                   }`}
-                  onClick={() =>
-                    setSelectedPhotoId(photo.photo_id)
-                  }
+                  onClick={() => setSelectedPhotoId(photo.photo_id)}
                 >
                   <img
                     src={photo.image_url}
@@ -114,20 +101,17 @@ function PersonGalleryModal({
         </section>
 
         {/* 대표사진 변경 버튼 */}
-        {selectedPhoto &&
-          !selectedPhoto.is_representative && (
-            <div className={styles.footer}>
-              <button
-                type="button"
-                className={styles.changeButton}
-                onClick={() =>
-                  onChangeRepresentative?.(selectedPhoto.photo_id)
-                }
-              >
-                대표사진으로 설정
-              </button>
-            </div>
-          )}
+        {selectedPhoto && !selectedPhoto.is_representative && (
+          <div className={styles.footer}>
+            <button
+              type="button"
+              className={styles.changeButton}
+              onClick={() => onChangeRepresentative?.(selectedPhoto.photo_id)}
+            >
+              대표사진으로 설정
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
