@@ -39,6 +39,36 @@ function VideoPanel({
       ) : (
         // 영상 연결 전 대기 화면
         <div className={styles.message}>
+          {isOriginal ? (
+            // 카메라 아이콘
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.2"
+              aria-hidden="true"
+            >
+              <path d="M4 7h4l2-2h4l2 2h4v12H4V7Z" />
+              <circle cx="12" cy="13" r="3.5" />
+            </svg>
+          ) : (
+            // 모니터 아이콘
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.2"
+              aria-hidden="true"
+            >
+              <rect x="3" y="4" width="18" height="14" />
+              <path d="M9 22h6M12 18v4" />
+            </svg>
+          )}
+
           <p>{waitingText}</p>
         </div>
       )}
