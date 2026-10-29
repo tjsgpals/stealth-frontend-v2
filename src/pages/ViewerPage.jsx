@@ -23,6 +23,7 @@ function ViewerPage() {
   const [streamStatus, setStreamStatus] = useState("waiting");
   const [isServerConnected, setIsServerConnected] = useState(false);
   const [isReceiving, setIsReceiving] = useState(false);
+  const [viewMode, setViewMode] = useState("demo");
 
   useEffect(() => {
     async function loadPersons() {
@@ -164,60 +165,83 @@ function ViewerPage() {
           <h1 className={styles.logo}>STEALTH</h1>
         </div>
 
-        <span className={styles.serverStatus}>
-          {isServerConnected ? "서버 연결됨" : "서버 연결 대기"}
-        </span>
-      </header>
-
-      {/* 메인 3분할 */}
-      <main className={styles.main}>
-        {/* 왼쪽: 원본 영상 */}
-        <section className={styles.originalSection}>
-          <div className={styles.videoHeadingRow}>
-            <div className={styles.sectionHeading}>
-              <span className={styles.sectionIcon}>
-                <svg
-                  width="17"
-                  height="17"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                >
-                  <path d="M4 7h4l2-2h4l2 2h4v12H4V7Z" />
-                  <circle cx="12" cy="13" r="3.5" />
-                </svg>
-              </span>
-
-              <h2 className={styles.sectionTitle}>원본 영상</h2>
-            </div>
-
-            <span className={styles.statusBadge}>
-              {streamStatus === "streaming"
-                ? "송출 중"
-                : streamStatus === "processing"
-                  ? "처리 중"
-                  : "대기 중"}
-            </span>
-          </div>
-
-          <div className={styles.videoArea}>
-            <VideoPanel
-              type="original"
-              image={originalImage}
-              status={streamStatus}
-            />
-          </div>
-
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <button
             type="button"
             className={styles.videoButton}
-            onClick={() => socket.emit("start_stream")}
-            disabled={!isServerConnected}
+            onClick={() =>
+              setViewMode((prev) => (prev === "demo" ? "test" : "demo"))
+            }
+            style={{ width: "auto", padding: "8px 14px", margin: 0 }}
           >
-            영상 보내기
+            {viewMode === "demo" ? "테스트 모드" : "시연 모드"}
           </button>
-        </section>
+
+          <span className={styles.serverStatus}>
+            {isServerConnected ? "서버 연결됨" : "서버 연결 대기"}
+          </span>
+        </div>
+      </header>
+
+      {/* 테스트 모드: 3분할 / 시연 모드: 2분할 */}
+      <main
+        className={styles.main}
+        style={{
+          gridTemplateColumns:
+            viewMode === "test"
+              ? undefined
+              : "minmax(0, 2fr) minmax(260px, 1fr)",
+        }}
+      >
+        {/* 테스트 모드에서만 원본 영상 표시 */}
+        {viewMode === "test" && (
+          <section className={styles.originalSection}>
+            <div className={styles.videoHeadingRow}>
+              <div className={styles.sectionHeading}>
+                <span className={styles.sectionIcon}>
+                  <svg
+                    width="17"
+                    height="17"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  >
+                    <path d="M4 7h4l2-2h4l2 2h4v12H4V7Z" />
+                    <circle cx="12" cy="13" r="3.5" />
+                  </svg>
+                </span>
+
+                <h2 className={styles.sectionTitle}>원본 영상</h2>
+              </div>
+
+              <span className={styles.statusBadge}>
+                {streamStatus === "streaming"
+                  ? "송출 중"
+                  : streamStatus === "processing"
+                    ? "처리 중"
+                    : "대기 중"}
+              </span>
+            </div>
+
+            <div className={styles.videoArea}>
+              <VideoPanel
+                type="original"
+                image={originalImage}
+                status={streamStatus}
+              />
+            </div>
+
+            <button
+              type="button"
+              className={styles.videoButton}
+              onClick={() => socket.emit("start_stream")}
+              disabled={!isServerConnected}
+            >
+              영상 보내기
+            </button>
+          </section>
+        )}
 
         {/* 가운데: AI 처리 영상 */}
         <section className={styles.processedSection}>
@@ -256,7 +280,16 @@ function ViewerPage() {
               status={isReceiving ? streamStatus : "waiting"}
             />
           </div>
-
+          {viewMode === "demo" && (
+            <button
+              type="button"
+              className={styles.videoButton}
+              onClick={() => socket.emit("start_stream")}
+              disabled={!isServerConnected}
+            >
+              영상 보내기
+            </button>
+          )}
           <button
             type="button"
             className={styles.videoButton}

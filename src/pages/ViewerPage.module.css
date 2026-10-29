@@ -237,3 +237,8 @@
   background: #54fca5;
   box-shadow: 0 0 7px #54fca5;
 }
+
+/* 시연 모드: 영상 버튼 간격 */
+.processedSection > .videoButton + .videoButton {
+    margin-top: 12px;
+}
